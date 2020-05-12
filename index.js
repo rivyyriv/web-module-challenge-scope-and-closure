@@ -25,6 +25,9 @@ function processFirstItem(stringList, callback) {
 
 /* Task 1: `counterMaker`
  * Study the code for counter1 and counter2. Answer the questions below.
+
+        counter 1 is useing the closure memory to store the count
+        counter 2 is useing a global variable to store the count
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
@@ -52,15 +55,22 @@ function counter2() {
 }
 
 
+
+
+
 /* Task 2: inning() 
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
+function inning(){
 
-    /*Code Here*/
-
+  let score = (Math.random() + Math.random() + .50)
+  
+  return Math.round(score)
+   
 }
+
+ 
 
 /* Task 3: finalScore()
 
@@ -76,11 +86,21 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
 
-  /*Code Here*/
+function FinalScore(callback, innings){
 
-}
+    let homeScore = callback() * innings;
+    let awayScore = callback() * innings;
+
+    this.Home = homeScore;
+    this.Away = awayScore;
+
+  }
+  const scoreobject = new FinalScore(inning, 7);
+
+
+
+
 
 /* Task 4: 
 
@@ -103,8 +123,18 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(callback, innings) {
+  let scoreboardarray = [];
+
+  for (let i = 0; i < 10; i++) {
+    let scoreobject = new FinalScore(callback, innings);
+
+    scoreboardarray.push(`${i}st inning: ${scoreobject.Away} - ${scoreobject.Home}`);
+
+  }
+   return scoreboardarray;    
 }
+
+console.log(scoreboard())
 
 
